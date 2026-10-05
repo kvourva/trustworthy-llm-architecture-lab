@@ -1,6 +1,6 @@
 # Research Questions (Phase 1)
 
-> Status: Phase 1 – research framing only. No datasets, models, retrieval, RAG, verification, oversight or experiments exist yet. Nothing in this document is a result.
+> Phase 1 captured the initial research framing. Later phases in this repository add prototype artefacts and experiment scaffolding; nothing in this document is an empirical result.
 
 ## 0. Framing and scope
 
