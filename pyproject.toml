@@ -1,0 +1,9 @@
+[project]
+name = "trustworthy-llm-architecture-lab"
+version = "0.1.0"
+description = "Research software for trustworthy LLM-enabled logistics incident management."
+requires-python = ">=3.12"
+readme = "README.md"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
