@@ -1,0 +1,100 @@
+requirements:
+  - id: TR-01
+    stakeholder: logistics operator
+    trust_attribute: explainability
+    description: Risk recommendations expose a reproducible reason code and evaluated risk label.
+    rationale: Operators need to inspect prioritisation and challenge model errors.
+    priority: high
+    risk_level: HIGH
+    architecture_driver: inspectability with reliable high-risk recall
+    implementation_component: ML Risk Service
+    verification_method: unit test model inference and metric schema
+    evaluation_metric: macro-F1; HIGH and CRITICAL recall
+  - id: TR-02
+    stakeholder: compliance officer
+    trust_attribute: traceability
+    description: Evidence-linked recommendations retain source identifiers and never invent evidence identifiers.
+    rationale: Regulatory or customs advice must be reviewable against retrieved material.
+    priority: critical
+    risk_level: HIGH
+    architecture_driver: provenance preservation
+    implementation_component: Retrieval Service and Verification Service
+    verification_method: integration test citation membership and retrieval failure
+    evaluation_metric: valid citation rate; unsupported-claim rate
+  - id: TR-03
+    stakeholder: logistics manager
+    trust_attribute: human oversight
+    description: HIGH items require human approval and CRITICAL items are escalated without automatic execution.
+    rationale: Consequential decisions remain assigned to accountable staff.
+    priority: critical
+    risk_level: CRITICAL
+    architecture_driver: risk-tiered routing
+    implementation_component: Policy Engine and Human Approval Gateway
+    verification_method: policy unit tests for all risk tiers
+    evaluation_metric: escalation rate; high-risk false negatives
+  - id: TR-04
+    stakeholder: Data Protection Officer
+    trust_attribute: privacy
+    description: Synthetic email and phone patterns can be redacted before downstream processing and logging.
+    rationale: Evaluate minimisation without using real personal information.
+    priority: high
+    risk_level: HIGH
+    architecture_driver: minimise sensitive text exposure
+    implementation_component: Privacy Filter
+    verification_method: synthetic PII redaction tests
+    evaluation_metric: precision; recall; false positives; leakage rate
+  - id: TR-05
+    stakeholder: regulator
+    trust_attribute: accountability
+    description: Audit events record requirement, component, outcome, and timestamp without storing raw incident text.
+    rationale: Support reconstruction while reducing unnecessary retention.
+    priority: high
+    risk_level: HIGH
+    architecture_driver: auditable minimal event record
+    implementation_component: Audit Service
+    verification_method: audit logging test and serialized-field inspection
+    evaluation_metric: audit event completeness; PII leakage rate
+  - id: TR-06
+    stakeholder: AI engineer
+    trust_attribute: reliability
+    description: Classifier evaluation reports macro metrics, per-class recall, confusion matrix, and high-risk false negatives.
+    rationale: Overall accuracy can hide poor performance on rare severe classes.
+    priority: high
+    risk_level: CRITICAL
+    architecture_driver: class-sensitive evaluation
+    implementation_component: ML Risk Service
+    verification_method: test evaluation output on labelled fixtures
+    evaluation_metric: macro-F1; HIGH and CRITICAL recall; false negatives
+  - id: TR-07
+    stakeholder: customer
+    trust_attribute: transparency
+    description: Missing or inconclusive evidence yields an explicit insufficient-evidence or review status.
+    rationale: Avoid presenting unsupported text as an established fact.
+    priority: critical
+    risk_level: HIGH
+    architecture_driver: fail-closed evidence handling
+    implementation_component: LLM Service and Verification Service
+    verification_method: tests for missing, contradictory, and unknown evidence
+    evaluation_metric: unsupported-claim rate; INSUFFICIENT_EVIDENCE rate
+  - id: TR-08
+    stakeholder: software architect
+    trust_attribute: security
+    description: Provider calls are isolated behind a provider interface and optional model dependencies are explicit.
+    rationale: Bound external-service coupling and make local tests reproducible.
+    priority: medium
+    risk_level: MEDIUM
+    architecture_driver: replaceable provider boundary
+    implementation_component: LLM Service
+    verification_method: mock-provider contract and provider-failure test
+    evaluation_metric: provider failure containment; offline test pass rate
+  - id: TR-09
+    stakeholder: logistics operator
+    trust_attribute: traceability
+    description: Stakeholder concerns link to requirements, components, tests, and evaluation metrics.
+    rationale: Make gaps visible as artefacts evolve.
+    priority: high
+    risk_level: MEDIUM
+    architecture_driver: machine-readable trace chain
+    implementation_component: Requirements and evaluation artefacts
+    verification_method: structural traceability test
+    evaluation_metric: requirement forward-link coverage
